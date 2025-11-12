@@ -1,0 +1,3 @@
+# Disable all themes and plugins so GitHub Pages just serves static files
+theme:
+plugins: []
