@@ -1,0 +1,57 @@
+name: Run Auto-Social
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    # 14:00 America/Chicago daily (convert to UTC: 20:00 or 19:00 depending on DST; using 20:00 UTC here)
+    - cron: "0 20 * * *"
+
+jobs:
+  build-and-post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Rotate featured item
+        run: python scripts/rotate.py
+
+      - name: Build feed files
+        run: python scripts/build_feed.py
+
+      - name: Commit feed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/featured.json docs/feed.xml
+          git commit -m "chore: update featured + RSS" || echo "No changes"
+          git push
+
+      - name: Ping IFTTT webhook (optional)
+        if: ${{ secrets.IFTTT_KEY != '' }}
+        run: |
+          TITLE=$(jq -r .title docs/featured.json)
+          URL=$(jq -r .url docs/featured.json)
+          IMG=$(jq -r .image docs/featured.json)
+          # Use the RSS description as caption for IFTTT value3
+          CAPTION=$(xmlstarlet sel -t -v "//description" docs/feed.xml | head -n1)
+          curl -s -X POST -H "Content-Type: application/json" \
+            -d "{\"value1\":\"$TITLE\",\"value2\":\"$URL\",\"value3\":\"$CAPTION\",\"value4\":\"$IMG\"}" \
+            "https://maker.ifttt.com/trigger/buycade_ping/with/key/${{ secrets.IFTTT_KEY }}" || true
+
+      - name: Post to Mastodon (optional)
+        if: ${{ secrets.MASTODON_BASE_URL != '' && secrets.MASTODON_TOKEN != '' }}
+        env:
+          MASTODON_BASE_URL: ${{ secrets.MASTODON_BASE_URL }}
+          MASTODON_TOKEN: ${{ secrets.MASTODON_TOKEN }}
+        run: python scripts/mastodon_post.py

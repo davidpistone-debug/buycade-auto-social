@@ -1,0 +1,5 @@
+🕹️ {{title}} — new drop just landed. {{cta}} {{url}} {{tags}}
+✨ Spotlight: {{title}}. Dive in for today’s picks. {{cta}} {{url}} {{tags}}
+🎯 Today’s Feature: {{title}}. Hand‑picked for max fun. {{cta}} {{url}} {{tags}}
+🛒 Ready‑to‑play picks from {{title}} — grab what you love. {{cta}} {{url}} {{tags}}
+🎮 Now featuring {{title}} — unlock the look. {{cta}} {{url}} {{tags}}

@@ -1,0 +1,41 @@
+[
+  {
+    "id": "home-arcade-board",
+    "title": "\ud83c\udfe0 Home Arcade Board",
+    "url": "https://buycade.com/collections/home-arcade",
+    "image": "https://via.placeholder.com/1200x630.png?text=Home+Arcade+Board",
+    "description": "Level up your living space \u2014 furniture, lighting, and d\u00e9cor with neon\u2011arcade energy.",
+    "tags": [
+      "Buycade",
+      "ShoppingIsTheGame",
+      "ArcadeStyle",
+      "HomeVibes"
+    ]
+  },
+  {
+    "id": "sporting-goods-board",
+    "title": "\ud83c\udfc8 Sporting Goods Board",
+    "url": "https://buycade.com/collections/sporting-goods",
+    "image": "https://via.placeholder.com/1200x630.png?text=Sporting+Goods+Board",
+    "description": "Gear up for game day \u2014 curated picks across baseball, hoops, golf and more.",
+    "tags": [
+      "Buycade",
+      "GameDay",
+      "ArcadeMall",
+      "SportMode"
+    ]
+  },
+  {
+    "id": "toys-and-hobbies",
+    "title": "\ud83e\udde9 Toys & Hobbies Board",
+    "url": "https://buycade.com/collections/toys-hobbies",
+    "image": "https://via.placeholder.com/1200x630.png?text=Toys+%26+Hobbies+Board",
+    "description": "Build, play, and collect \u2014 playful finds from bricks to bots.",
+    "tags": [
+      "Buycade",
+      "ArcadeMall",
+      "ToyDrop",
+      "Collector"
+    ]
+  }
+]
